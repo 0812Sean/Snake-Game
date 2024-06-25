@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: url('https://p2.bahamut.com.tw/B/2KU/08/c791fa0575161c811f53d907001bvb45.JPG')no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+.btn {
+    width: 150px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 25px;
+    align-items: center;
+}
+
+.btn button {
+    width: 80px;
+    height: 40px;
+    font-size: large;
+    background: rgb(34, 202, 240);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+.btn button:hover {
+    transform: scale(0.9);
+}
+.map {
+    width: 900px;
+    height: 600px;
+    background: rgb(79, 192, 212);
+    border: 5px solid rgb(41, 154, 199);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0.8;
+
+}
+.map div{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: #ff4e00;
+    display: flex;
+    align-items: center;
+}
+.body {
+    background: rgb(237, 199, 29);
+}
+.food {
+    animation: foodAni 1s linear infinite;
+    justify-content: center;
+}
+@keyframes foodAni {
+    0%{
+        box-shadow: 0px 0px 10px rgb(209, 21, 21);
+    }
+    5%{
+        box-shadow: 0px 0px 80px rgb(206, 19, 19);
+    }
+    100%{
+        box-shadow: 0px 0px 10px rgb(211, 19, 19);
+    }
+}
