@@ -2,7 +2,7 @@
 
 A simple snake game implemented using HTML, CSS, and JavaScript. The game can be played in the browser, and it includes features such as starting, pausing, and resuming the game, as well as displaying instructions.
 
-![Screenshot](assets/screenshot.png)
+![Screenshot](assets/Screenshot.png)
 
 
 
@@ -13,6 +13,8 @@ A simple snake game implemented using HTML, CSS, and JavaScript. The game can be
 - Dynamic background color change
 - Score tracking
 - Increase speed as the score increases
+
+To play this game, click [here](https://0812sean.github.io/Snake-Game/).
 
 ## Usage
 

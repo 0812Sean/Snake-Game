@@ -111,7 +111,7 @@ function checkKey(e) {
     const now = Date.now();
     if (now - lastDirectionChangeTime < 50) return;
     e = e || window.event;
-    const keyCode = e.keycode || e.which;
+    const keyCode = e.keyCode || e.which;
     switch (keyCode) {
         case 32:
             if (gameEnded) {
