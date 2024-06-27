@@ -3,29 +3,68 @@
     padding: 0;
 }
 body {
-    background: url('https://p2.bahamut.com.tw/B/2KU/08/c791fa0575161c811f53d907001bvb45.JPG')no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    animation: backgroundChange 10s infinite;
+    background-size: 400% 400%;
+    font-family: Arial, sans-serif;;
 }
+@keyframes backgroundChange {
+    0% {
+        background-color: #FFB6C1;
+    }
+    25% {
+        background-color: #FFDEAD;
+    }
+    50% {
+        background-color: #E6E6FA;
+    }
+    75% {
+        background-color: #B0E0E6;
+    }
+    100% {
+        background-color: #FFB6C1;
+    }
+}
+
+.instructions {
+    background: rgb(125, 208, 235);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.instructions h2 {
+    margin-bottom: 10px;
+}
+.instructions p {
+    margin-bottom: 8px;
+}    
+
 .btn {
     width: 150px;
-    height: 200px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     gap: 25px;
     align-items: center;
+    margin-top: 20px;
 }
 
 .btn button {
     width: 80px;
     height: 40px;
     font-size: large;
-    background: rgb(34, 202, 240);
+    background: rgb(125, 208, 235);
     cursor: pointer;
     transition: transform 0.3s ease;
     border-radius: 10px;
+    border: none;
 }
 .btn button:hover {
     transform: scale(0.9);
@@ -33,8 +72,8 @@ body {
 .map {
     width: 900px;
     height: 600px;
-    background: rgb(79, 192, 212);
-    border: 5px solid rgb(41, 154, 199);
+    background:black;
+    border: 5px solid black;
     position: fixed;
     top: 0;
     left: 0;
@@ -42,41 +81,45 @@ body {
     bottom: 0;
     margin: auto;
     opacity: 0.8;
-
 }
 .map div{
     width: 20px;
     height: 20px;
     position: absolute;
     border-radius: 50%;
-    box-shadow: #ff4e00;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0px 0px 10px gold;
+}
+.head {
+    background: repeating-radial-gradient(#ffc000,#ff4e00);
 }
 .body {
-    background: rgb(237, 199, 29);
+    background: repeating-radial-gradient(#fff369,#fa791a);
 }
 .food {
-    animation: foodAni 1s linear infinite;
-    justify-content: center;
+    background: repeating-radial-gradient(#a7fa64,#4f8524);
+    animation: foodAni 1.5s linear infinite;
 }
 @keyframes foodAni {
     0%{
-        box-shadow: 0px 0px 10px rgb(209, 21, 21);
+        box-shadow: 0px 0px 10px white;
     }
     5%{
-        box-shadow: 0px 0px 80px rgb(206, 19, 19);
+        box-shadow: 0px 0px 80px white;
     }
     100%{
-        box-shadow: 0px 0px 10px rgb(211, 19, 19);
+        box-shadow: 0px 0px 10px white;
     }
 }
+
 .score {
     font-size: 24px;
     color: white;
     text-align: center;
-    /* position: fixed;
-    top:150px;
-    width: 100%; */
+    position: fixed;
+    top:50px;
+    width: 100%;
 }
+/* 
+.end {
+    display: none;
+} */
