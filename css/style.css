@@ -53,7 +53,7 @@ body {
     justify-content: flex-end;
     gap: 25px;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10;
 }
 
 .btn button {
@@ -64,7 +64,7 @@ body {
     cursor: pointer;
     transition: transform 0.3s ease;
     border-radius: 10px;
-    /* border: none; */
+    border: none;
 }
 .btn button:hover {
     transform: scale(0.9);
