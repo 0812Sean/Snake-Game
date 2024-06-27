@@ -2,6 +2,8 @@
 const startButton = document.querySelector('.start');
 const pauseButton = document.querySelector('.pause');
 const endButton = document.querySelector('.end');
+const showInstructionsButton = document.querySelector('.show-instructions');
+const instructions = document.getElementById('instructions'); 
 
 // Get the map, food and score element
 const map = document.querySelector('.map');
@@ -9,19 +11,25 @@ const food = document.querySelector('.food');
 const scoreDisplay = document.querySelector('.score');
 
 let snake;
-let direction;
+let nextDirection;
 let foodPosition;
 let score;
 let gameInterval;
 let isPaused = false;
 let speed = 200;
+let gameEnded = false;
+let lastDirectionChangeTime = 0;
 
-// Set the initial food position.
+// Set the initial food position，and make sure food is not in the snake's part.
 function setFoodPosition() {
-    foodPosition = {
-        x: Math.floor(Math.random() * (map.clientWidth / 20)) * 20,
-        y: Math.floor(Math.random() * (map.clientHeight / 20)) * 20
-    };
+    let validPosition = false;
+    while (!validPosition){
+        foodPosition = {
+            x: Math.floor(Math.random() * (map.clientWidth / 20)) * 20,
+            y: Math.floor(Math.random() * (map.clientHeight / 20)) * 20
+        };
+        validPosition = !snake.some(part => part.x === foodPosition.x && part.y === foodPosition.y);
+    }
     food.style.left = `${foodPosition.x}px`;
     food.style.top = `${foodPosition.y}px`;
 }
@@ -41,7 +49,6 @@ function render() {
     headEl.style.left = `${head.x}px`;
     headEl.style.top = `${head.y}px`;
     headEl.classList.add('head');
-    headEl.innerHTML = '😤'
     map.appendChild(headEl)
 
     // creating the snake body
@@ -54,13 +61,14 @@ function render() {
         map.appendChild(bodyEl);
     }
     // Set up and add food
-    // setFoodPosition();
     map.appendChild(food);
 }
 
 // Update the snake's position
 function update() {
     if (isPaused) return;
+
+    direction = nextDirection;
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
     // Check if hit the wall.
     if (head.x < 0 || head.x >= map.clientWidth || head.y < 0 || head.y >= map.clientHeight) {
@@ -100,23 +108,42 @@ function update() {
 
 // Keyboard input.
 function checkKey(e) {
+    const now = Date.now();
+    if (now - lastDirectionChangeTime < 50) return;
     e = e || window.event;
     const keyCode = e.keycode || e.which;
     switch (keyCode) {
         case 32:
-        pauseGame();
-        break;
+            if (gameEnded) {
+                init();
+                gameEnded = false;
+            } else {
+                pauseGame();
+            }
+            break;
         case 38:
-            if (direction.y === 0) direction = { x: 0, y: -20 }; 
+            if (direction.y === 0) { 
+                nextDirection = { x: 0, y: -20 }; 
+                lastDirectionChangeTime = now; 
+            }
             break;
         case 40:
-            if (direction.y === 0) direction = { x: 0, y: 20 };
+            if (direction.y === 0) { 
+                nextDirection = { x: 0, y: 20 };
+                lastDirectionChangeTime = now; 
+            }
             break;
         case 37:
-            if (direction.x === 0) direction = { x: -20, y: 0 };
+            if (direction.x === 0) {
+                nextDirection = { x: -20, y: 0 };
+                lastDirectionChangeTime = now; 
+            }
             break;
         case 39:
-            if (direction.x === 0) direction = { x: 20, y: 0 };
+            if (direction.x === 0) {
+                nextDirection = { x: 20, y: 0 };
+                lastDirectionChangeTime = now; 
+            }
             break;
         default:
             break;   
@@ -135,6 +162,7 @@ function init(){
         { x: 0, y:0}
     ];
     direction = { x: 20, y: 0 };
+    nextDirection = direction;
     foodPosition = {
         x: Math.floor(Math.random() * (map.clientWidth / 20)) * 20,
         y: Math.floor(Math.random() * (map.clientHeight / 20)) * 20
@@ -142,10 +170,20 @@ function init(){
     score = 0;
     isPaused = false;
     speed = 200;
+    lastDirectionChangeTime = 0;
     setFoodPosition();
     updateScore();
     render();
     if (gameInterval) clearInterval(gameInterval)
+    gameInterval = setInterval(gameLoop, speed);
+    // Reset the pause button text.
+    pauseButton.textContent = 'pause';
+
+}
+
+// start game
+function startGame() {
+    if (gameInterval) clearInterval(gameInterval);
     gameInterval = setInterval(gameLoop, speed);
 }
 
@@ -163,6 +201,15 @@ function pauseGame() {
 function endGame(){
     clearInterval(gameInterval);
     scoreDisplay.textContent = `Game Over! Your score is ${score}`;
+    gameEnded = true;
+}
+// Display or hide instructions.
+function toggleInstructions() {
+    if (instructions.style.display === 'block') {
+        instructions.style.display = 'none';
+    } else {
+        instructions.style.display = 'block';
+    }
 }
 
 // Prevents the default behavior of the spacebar on a button.
@@ -172,7 +219,7 @@ function preventSpaceKeyDefault(event) {
     }
 }
 
-[startButton, pauseButton, endButton].forEach(button => {
+[startButton, pauseButton, endButton, showInstructionsButton].forEach(button => {
     button.addEventListener('focus', () => {
         button.addEventListener('keydown', preventSpaceKeyDefault);
     });
@@ -183,10 +230,16 @@ function preventSpaceKeyDefault(event) {
 });
 
 // Event listeners 
-startButton.addEventListener('click', init);
+startButton.addEventListener('click', () => {
+    init();
+    startGame();
+});
 pauseButton.addEventListener('click', pauseGame);
 endButton.addEventListener('click', endGame);
 document.addEventListener('keydown',checkKey);
-
-// Initialize the game
-init();
+showInstructionsButton.addEventListener('click', toggleInstructions);
+document.addEventListener('click', (e) => {
+    if (e.target !== showInstructionsButton && instructions.style.display === 'block') {
+        instructions.style.display = 'none';
+    }
+});
