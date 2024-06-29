@@ -1,9 +1,15 @@
 // Get the button element
+const playButton = document.querySelector('.play');
 const startButton = document.querySelector('.start');
 const pauseButton = document.querySelector('.pause');
 const endButton = document.querySelector('.end');
+const backButton = document.querySelector('.back');
 const showInstructionsButton = document.querySelector('.show-instructions');
-const instructions = document.getElementById('instructions'); 
+const instructions = document.getElementById('instructions');
+
+// Get the screens
+const initialScreen = document.getElementById('initial-screen');
+const gameScreen = document.getElementById('game-screen');
 
 // Get the map, food and score element
 const map = document.querySelector('.map');
@@ -20,10 +26,10 @@ let speed = 200;
 let gameEnded = false;
 let lastDirectionChangeTime = 0;
 
-// Set the initial food position，and make sure food is not in the snake's part.
+// Set the initial food position, and make sure food is not in the snake's part.
 function setFoodPosition() {
     let validPosition = false;
-    while (!validPosition){
+    while (!validPosition) {
         foodPosition = {
             x: Math.floor(Math.random() * (map.clientWidth / 20)) * 20,
             y: Math.floor(Math.random() * (map.clientHeight / 20)) * 20
@@ -38,9 +44,10 @@ function setFoodPosition() {
 function updateScore() {
     scoreDisplay.textContent = `Score: ${score}`;
 }
-// Rendeing of snake and food.
+
+// Rendering of snake and food.
 function render() {
-    // Clear everying on the map
+    // Clear everything on the map
     map.innerHTML = '';
 
     // creating the snake head
@@ -49,10 +56,10 @@ function render() {
     headEl.style.left = `${head.x}px`;
     headEl.style.top = `${head.y}px`;
     headEl.classList.add('head');
-    map.appendChild(headEl)
+    map.appendChild(headEl);
 
     // creating the snake body
-    for (let i=1; i < snake.length; i++) {
+    for (let i = 1; i < snake.length; i++) {
         const part = snake[i];
         const bodyEl = document.createElement('div');
         bodyEl.style.left = `${part.x}px`;
@@ -68,7 +75,7 @@ function render() {
 function update() {
     if (isPaused) return;
 
-    direction = nextDirection;
+    const direction = nextDirection;
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
     // Check if hit the wall.
     if (head.x < 0 || head.x >= map.clientWidth || head.y < 0 || head.y >= map.clientHeight) {
@@ -76,7 +83,7 @@ function update() {
         return;
     }
 
-    // Check is hit itself
+    // Check if hit itself
     for (const part of snake) {
         if (head.x === part.x && head.y === part.y) {
             endGame();
@@ -92,24 +99,24 @@ function update() {
         score += 5;
         setFoodPosition();
         updateScore();
-    
-    // Check if the score is a multiple of 50
-    if (score % 50 === 0) {
-        speed = Math.max(50,speed - 20);
-        clearInterval(gameInterval);
-        gameInterval = setInterval(gameLoop,speed);
-    }
-    }else {
+
+        // Check if the score is a multiple of 50
+        if (score % 50 === 0) {
+            speed = Math.max(50, speed - 20);
+            clearInterval(gameInterval);
+            gameInterval = setInterval(gameLoop, speed);
+        }
+    } else {
         // Remove the last part of the snake
         snake.pop();
     }
-    render()
+    render();
 }
 
 // Keyboard input.
 function checkKey(e) {
     const now = Date.now();
-    if (now - lastDirectionChangeTime < 50) return;
+    if (now - lastDirectionChangeTime < 100) return;
     e = e || window.event;
     const keyCode = e.keyCode || e.which;
     switch (keyCode) {
@@ -122,47 +129,48 @@ function checkKey(e) {
             }
             break;
         case 38:
-            if (direction.y === 0) { 
-                nextDirection = { x: 0, y: -20 }; 
-                lastDirectionChangeTime = now; 
+            if (nextDirection.y === 0) {
+                nextDirection = { x: 0, y: -20 };
+                lastDirectionChangeTime = now;
             }
             break;
         case 40:
-            if (direction.y === 0) { 
+            if (nextDirection.y === 0) {
                 nextDirection = { x: 0, y: 20 };
-                lastDirectionChangeTime = now; 
+                lastDirectionChangeTime = now;
             }
             break;
         case 37:
-            if (direction.x === 0) {
+            if (nextDirection.x === 0) {
                 nextDirection = { x: -20, y: 0 };
-                lastDirectionChangeTime = now; 
+                lastDirectionChangeTime = now;
             }
             break;
         case 39:
-            if (direction.x === 0) {
+            if (nextDirection.x === 0) {
                 nextDirection = { x: 20, y: 0 };
-                lastDirectionChangeTime = now; 
+                lastDirectionChangeTime = now;
             }
             break;
         default:
-            break;   
+            break;
     }
 }
+
 // main game loop
 function gameLoop() {
-    update()
+    update();
 }
+
 // Initialize the game
-function init(){
+function init() {
     // The initial length of the snake is 3
     snake = [
         { x: 40, y: 0 },
-        { x: 20, y:0},
-        { x: 0, y:0}
+        { x: 20, y: 0 },
+        { x: 0, y: 0 }
     ];
-    direction = { x: 20, y: 0 };
-    nextDirection = direction;
+    nextDirection = { x: 20, y: 0 };
     foodPosition = {
         x: Math.floor(Math.random() * (map.clientWidth / 20)) * 20,
         y: Math.floor(Math.random() * (map.clientHeight / 20)) * 20
@@ -174,11 +182,10 @@ function init(){
     setFoodPosition();
     updateScore();
     render();
-    if (gameInterval) clearInterval(gameInterval)
+    if (gameInterval) clearInterval(gameInterval);
     gameInterval = setInterval(gameLoop, speed);
     // Reset the pause button text.
-    pauseButton.textContent = 'pause';
-
+    pauseButton.textContent = 'Pause';
 }
 
 // start game
@@ -191,18 +198,19 @@ function startGame() {
 function pauseGame() {
     isPaused = !isPaused;
     if (isPaused) {
-        pauseButton.textContent = 'resume';
-    }else{
-        pauseButton.textContent = 'pause';
+        pauseButton.textContent = 'Resume';
+    } else {
+        pauseButton.textContent = 'Pause';
     }
 }
 
 // End game
-function endGame(){
+function endGame() {
     clearInterval(gameInterval);
     scoreDisplay.textContent = `Game Over! Your score is ${score}`;
     gameEnded = true;
 }
+
 // Display or hide instructions.
 function toggleInstructions() {
     if (instructions.style.display === 'block') {
@@ -219,7 +227,7 @@ function preventSpaceKeyDefault(event) {
     }
 }
 
-[startButton, pauseButton, endButton, showInstructionsButton].forEach(button => {
+[startButton, pauseButton, endButton, backButton, showInstructionsButton].forEach(button => {
     button.addEventListener('focus', () => {
         button.addEventListener('keydown', preventSpaceKeyDefault);
     });
@@ -230,13 +238,26 @@ function preventSpaceKeyDefault(event) {
 });
 
 // Event listeners 
+playButton.addEventListener('click', () => {
+    initialScreen.classList.add('hidden');
+    gameScreen.style.display = 'block';
+    setTimeout(() => {
+        gameScreen.classList.add('visible');
+    }, 20);
+});
 startButton.addEventListener('click', () => {
     init();
     startGame();
 });
 pauseButton.addEventListener('click', pauseGame);
 endButton.addEventListener('click', endGame);
-document.addEventListener('keydown',checkKey);
+backButton.addEventListener('click', () => {
+    initialScreen.classList.remove('hidden');
+    initialScreen.classList.add('visible');
+    gameScreen.classList.remove('visible');
+    gameScreen.style.display = 'none';
+});
+document.addEventListener('keydown', checkKey);
 showInstructionsButton.addEventListener('click', toggleInstructions);
 document.addEventListener('click', (e) => {
     if (e.target !== showInstructionsButton && instructions.style.display === 'block') {
