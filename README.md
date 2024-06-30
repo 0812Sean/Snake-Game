@@ -1,6 +1,6 @@
 # Snake-Game
 
-A simple snake game implemented using HTML, CSS, and JavaScript. The game can be played in the browser, and it includes features such as starting, pausing, and resuming the game, as well as displaying instructions.
+This project is a simple Snake game implemented using HTML, CSS, and JavaScript. The game includes a start screen, game screen, instructions modal, and sound effects for eating food and game over events. The game keeps track of the score and allows the player to pause, resume, and end the game.
 
 ![Screenshot](assets/Screenshot%20.png)
 
@@ -13,6 +13,7 @@ A simple snake game implemented using HTML, CSS, and JavaScript. The game can be
 - Dynamic background color change
 - Score tracking
 - Increase speed as the score increases
+- Sound effects for eating food and game over events.
 
 ## How To Play
 
@@ -58,4 +59,4 @@ let speed = 200
 ## Future Improvements
 - Adding levels of difficulty.
 - Make a score leaderboard.
-- Enhancing the game with sound effects and additional animations.
+- Enhancing the game with more sound effects and additional animations.

@@ -5,7 +5,7 @@
 body {
     animation: backgroundChange 10s infinite;
     background-size: 400% 400%;
-    font-family: Arial, sans-serif;
+    font-family:'Times New Roman', Times, serif;
 }
 @keyframes backgroundChange {
     0% {
@@ -125,6 +125,10 @@ body {
     background:linear-gradient(45deg, white, gold);
 }
 .map {
+    /* width: 95vw;
+    height: 80vh;
+    max-width: 900px;
+    max-height: 600px; */
     width: 900px;
     height: 600px;
     background: black;
@@ -173,7 +177,50 @@ body {
     top: 40px;
     width: 100%;
     font-weight: bold;
-    background: linear-gradient(to right, white, #e65100);
+    background: linear-gradient(to right, #FFD700, black);
     background-clip: text;
     color: transparent;
+}
+@media (max-width: 1200px) {
+    .btn {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin-top: 0;
+    }
+
+    .btn button {
+        width: 80px;
+        height: 40px;
+        font-size: medium;
+        margin: 5px;
+    }
+
+    .score {
+        font-size: 30px;
+        text-align: center;
+        position: fixed;
+        top: 60px;
+        width: 100%;
+        font-weight: bold;
+        background: linear-gradient(to right, rgb(255, 233, 111), black, gold);
+        background-clip: text;
+        color: transparent;
+    }
+
+    .map {
+        width: auto;
+        height: auto;
+        background: black;
+        border: 5px solid black;
+        position: fixed;
+        top: 100px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        margin: auto;
+        opacity: 0.8;
+    }
 }

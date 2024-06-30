@@ -18,6 +18,7 @@ const scoreDisplay = document.querySelector('.score');
 
 const eatSound = document.getElementById('eat-sound');
 const gameOverSound = document.getElementById('game-over-sound');
+const pageTurnSound = document.getElementById('page-turn-sound');
 
 
 let snake;
@@ -245,6 +246,7 @@ function preventSpaceKeyDefault(event) {
 
 // Event listeners 
 playButton.addEventListener('click', () => {
+    pageTurnSound.play(); 
     initialScreen.classList.add('hidden');
     gameScreen.style.display = 'block';
     setTimeout(() => {
@@ -258,6 +260,7 @@ startButton.addEventListener('click', () => {
 pauseButton.addEventListener('click', pauseGame);
 endButton.addEventListener('click', endGame);
 backButton.addEventListener('click', () => {
+    pageTurnSound.play(); 
     initialScreen.classList.remove('hidden');
     initialScreen.classList.add('visible');
     gameScreen.classList.remove('visible');
