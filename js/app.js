@@ -113,7 +113,7 @@ function update() {
     render();
 }
 
-// Keyboard input.
+// Keyboard input， and prevents pressing two arrow keys at the same time to ending the game.
 function checkKey(e) {
     const now = Date.now();
     if (now - lastDirectionChangeTime < 100) return;

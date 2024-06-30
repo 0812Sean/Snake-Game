@@ -26,7 +26,7 @@ body {
 }
 
 .instructions {
-    background: rgb(125, 208, 235);
+    background: linear-gradient(45deg, darkgreen,lightyellow);
     border-radius: 10px;
     padding: 20px;
     max-width: 300px;
@@ -51,7 +51,6 @@ body {
     justify-content:flex-end;
     align-items: center;
     height: 100vh;
-    gap: 25px;
     background: url('https://imgcdn.stablediffusionweb.com/2024/6/29/00f7a248-a153-4f42-a407-77a2785688d7.jpg') no-repeat center center;
     background-size:1470px 800px;
     transition: opacity 2s ease-out, transform 2s ease-out;
@@ -65,7 +64,7 @@ body {
 #initial-screen button {
     width: 150px;
     height: 50px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: large;
     background:  linear-gradient(45deg, darkgreen, white);
     cursor: pointer;
@@ -159,7 +158,7 @@ body {
     0% {
         box-shadow: 0px 0px 10px white;
     }
-    5% {
+    50% {
         box-shadow: 0px 0px 80px white;
     }
     100% {
@@ -168,10 +167,13 @@ body {
 }
 
 .score {
-    font-size: 24px;
-    color: white;
+    font-size: 30px;
     text-align: center;
     position: fixed;
-    top: 50px;
+    top: 40px;
     width: 100%;
+    font-weight: bold;
+    background: linear-gradient(to right, white, #e65100);
+    background-clip: text;
+    color: transparent;
 }
