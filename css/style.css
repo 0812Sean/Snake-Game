@@ -51,7 +51,7 @@ body {
     justify-content:flex-end;
     align-items: center;
     height: 100vh;
-    background: url('https://imgcdn.stablediffusionweb.com/2024/6/29/00f7a248-a153-4f42-a407-77a2785688d7.jpg') no-repeat center center;
+    background: url('../assets/Background.jpg') no-repeat center center;
     background-size:1470px 800px;
     transition: opacity 2s ease-out, transform 2s ease-out;
 }
