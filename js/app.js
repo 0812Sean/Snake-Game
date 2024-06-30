@@ -16,6 +16,10 @@ const map = document.querySelector('.map');
 const food = document.querySelector('.food');
 const scoreDisplay = document.querySelector('.score');
 
+const eatSound = document.getElementById('eat-sound');
+const gameOverSound = document.getElementById('game-over-sound');
+
+
 let snake;
 let nextDirection;
 let foodPosition;
@@ -99,6 +103,7 @@ function update() {
         score += 5;
         setFoodPosition();
         updateScore();
+        eatSound.play();
 
         // Check if the score is a multiple of 50
         if (score % 50 === 0) {
@@ -209,6 +214,7 @@ function endGame() {
     clearInterval(gameInterval);
     scoreDisplay.textContent = `Game Over! Your score is ${score}`;
     gameEnded = true;
+    gameOverSound.play();
 }
 
 // Display or hide instructions.
