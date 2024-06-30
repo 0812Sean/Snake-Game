@@ -1,6 +1,6 @@
 # Snake-Game
 
-This project is a simple Snake game implemented using HTML, CSS, and JavaScript. The game includes a start screen, game screen, instructions modal, and sound effects for eating food and game over events. The game keeps track of the score and allows the player to pause, resume, and end the game.
+This project is a simple Snake game implemented using HTML, CSS, and JavaScript. The game includes a start screen, game screen, instructions modal, and sound effects for eating food and game over, and a page turn sound effect when navigating between screens.. The game keeps track of the score and allows the player to pause, resume, and end the game.
 
 ![Screenshot](assets/Screenshot%20.png)
 
@@ -13,7 +13,7 @@ This project is a simple Snake game implemented using HTML, CSS, and JavaScript.
 - Dynamic background color change
 - Score tracking
 - Increase speed as the score increases
-- Sound effects for eating food and game over events.
+- sound effects for eating food and game over, and a page turn sound effect when navigating between screens.
 
 ## How To Play
 
