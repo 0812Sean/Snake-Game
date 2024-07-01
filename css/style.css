@@ -125,10 +125,6 @@ body {
     background:linear-gradient(45deg, white, gold);
 }
 .map {
-    /* width: 95vw;
-    height: 80vh;
-    max-width: 900px;
-    max-height: 600px; */
     width: 900px;
     height: 600px;
     background: black;

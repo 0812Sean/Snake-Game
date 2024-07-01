@@ -14,6 +14,7 @@ This project is a simple Snake game implemented using HTML, CSS, and JavaScript.
 - Score tracking
 - Increase speed as the score increases
 - sound effects for eating food and game over, and a page turn sound effect when navigating between screens.
+- The game screen changes as the web page shrinks.
 
 ## How To Play
 
