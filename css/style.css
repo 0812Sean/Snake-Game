@@ -51,8 +51,8 @@ body {
     justify-content:flex-end;
     align-items: center;
     height: 100vh;
-    background: url('../assets/Background.jpg') no-repeat center center;
-    background-size:1470px 800px;
+    background: url('../assets/Background1.jpg') no-repeat center center;
+    background-size:cover;
     transition: opacity 2s ease-out, transform 2s ease-out;
 }
 
